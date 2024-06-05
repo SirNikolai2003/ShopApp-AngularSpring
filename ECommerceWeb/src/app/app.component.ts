@@ -4,6 +4,8 @@ import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { OrderComponent } from './order/order.component';
 import { HomeComponent } from './home/home.component';
+import { OrderConfirmComponent } from './order-confirm/order-confirm.component';
+import { LoginComponent } from './login/login.component';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -12,7 +14,9 @@ import { HomeComponent } from './home/home.component';
     FooterComponent,
     HeaderComponent,
     OrderComponent,
-    HomeComponent
+    HomeComponent,
+    OrderConfirmComponent,
+    LoginComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
