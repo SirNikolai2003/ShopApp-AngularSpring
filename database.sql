@@ -1,5 +1,5 @@
-Create database ShopApp;
-use ShopApp;
+-- Create database ShopApp;
+-- use ShopApp;
 create table users(
     id int primary key auto_increment,
     fullname varchar(100) default '',
@@ -17,7 +17,7 @@ alter table users add column role_id int;
 create table roles(
     id int primary key,
     name varchar(255) not null,
-)
+);
 create table tokens(
     id int primary key auto_increment,
     token varchar(255) unique not null,
