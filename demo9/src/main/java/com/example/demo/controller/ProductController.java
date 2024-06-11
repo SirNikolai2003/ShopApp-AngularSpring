@@ -3,10 +3,13 @@ package com.example.demo.controller;
 import com.example.demo.dtos.ProductDTO;
 import jakarta.validation.Valid;
 import lombok.*;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -29,6 +32,7 @@ public class ProductController {
     @PostMapping("")
     public ResponseEntity<?> createProduct(
             @Valid @RequestBody ProductDTO productDTO,
+            @RequestPart("file") MultipartFile file,
             BindingResult result
             ){
         try{
@@ -37,8 +41,12 @@ public class ProductController {
                         .map(FieldError::getDefaultMessage).toList();
                 return ResponseEntity.badRequest().body(errorMessages);
             }
+            if(file.getSize() > 10 *1024*1024){
+                return ResponseEntity.status(HttpStatus.PAYLOAD_TOO_LARGE)
+                        .body("File is too large! Maximum size is 10MB");
+            }
+            String contentType = file.getContentType();
             return ResponseEntity.ok("Product created successfully");
-
         }catch (Exception e){
             return ResponseEntity.badRequest().body(e.getMessage());
         }

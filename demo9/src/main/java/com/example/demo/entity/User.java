@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.extern.java.Log;
 
+import java.util.Date;
+
 @Entity
 @Data
 @Table(name = "users")
@@ -13,13 +15,31 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String email;
+    @Column(name = "fullname", length = 100)
+    private String fullname;
+
+    @Column(name = "phone_number", length = 10, nullable = false)
+    private String phoneNumber;
+
+    @Column(name = "address", length = 200)
+    private String address;
+
+    @Column(name = "password", length = 200)
     private String password;
-    private String name;
 
-    private UserRole userRole;
+    private boolean active;
+    @Column(name = "date_of_birth")
+    private Date dateOfBirth;
 
-    @Lob
-    @Column(columnDefinition = "longblob")
-    private byte[] ing;
+    @Column(name = "facebook_account_id")
+    private int facebookAccountId;
+
+    @Column(name = "google_account_id")
+    private int googleAccountId;
+
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    private Role role;
+
+
 }
