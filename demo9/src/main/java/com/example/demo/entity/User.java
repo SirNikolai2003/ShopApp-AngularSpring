@@ -2,13 +2,18 @@ package com.example.demo.entity;
 
 import com.example.demo.enums.UserRole;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 import lombok.extern.java.Log;
 
 import java.util.Date;
 
 @Entity
 @Data
+@Builder
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "users")
 public class User {
     @Id
